@@ -32,6 +32,7 @@ public class exportTxBackend extends exportBackend{
 
     public Stream<KeyListEntity> getKeyListsTable( TxDatabaseAdapter txDatabaseAdapter, ConnectionWrapper conn )
     {
+        //Not sure correct or not
         //Should get this
         List<Hash> keyListsIds;
 
@@ -63,10 +64,11 @@ public class exportTxBackend extends exportBackend{
 
     }
 
-//    //Total Logic can be here
-//    public void exportRefLogHeadTableIntoFile(RefLogHead refLogHeadTable)
-//    {
-//
-//    }
+    //Total Logic can be here
+    //RefLog is private interface
+    public void exportRefLogHeadTableIntoFile(RefLogHead refLogHeadTable)
+    {
+
+    }
 
 }

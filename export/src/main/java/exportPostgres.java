@@ -85,8 +85,7 @@ public class exportPostgres extends exportTxBackend{
 
         //Ref Log Head table
         //RefLogHead is private in tx package and the function to get RefLogHead is also protected function
-
-//        RefLogHead refLogHeadTable = getRefLogHeadTable(postgresDBAdapter, conn);
+        RefLogHead refLogHeadTable = getRefLogHeadTable(postgresDBAdapter, conn);
 
 
 

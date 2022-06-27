@@ -64,13 +64,16 @@ public class exportMongo extends exportNonTxBackend{
         //Doubtful
         Stream<KeyListEntity> keysListsTable = getKeyListsTable(mongoDatabaseAdapter, ctx);
 
-        // ref log head Table
-
-
         //Ref names Table
         Stream<AdapterTypes.NamedReference> namedRefTable = getNamedRefsTable(mongoDatabaseAdapter, ctx);
 
-        //ref heads table
+        // ref log head Table ??
+
+
+        //ref heads table ??
+
+
+
 
         Stream<ReferenceInfo<ByteString>> refs = mongoDatabaseAdapter.namedRefs(GetNamedRefsParams.DEFAULT);
 

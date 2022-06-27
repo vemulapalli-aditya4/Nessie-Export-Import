@@ -18,8 +18,8 @@ public class exportBackend {
     //which can be implemented in exportTx and exportNonTx
     public Stream <RefLog> getRefLogTable(DatabaseAdapter dbAdapter)
     {
+        //Should get the initial Hash
         Hash initialHash;
-
 
         Stream <RefLog> StreamOfAllRefLogEntries;
 
