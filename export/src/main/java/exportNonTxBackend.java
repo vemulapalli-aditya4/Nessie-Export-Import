@@ -9,11 +9,29 @@ import java.util.stream.Stream;
 
 public class exportNonTxBackend extends exportBackend {
 
+    public NonTransactionalOperationContext ctx;
+
+    // Global State Log Table
+    public Stream<AdapterTypes.GlobalStateLogEntry> globalStateLogTable ;
+
+    // Global Pointer Table
+    public AdapterTypes.GlobalStatePointer globalPointerTable ;
+
+    //Ref names Table
+    public Stream<AdapterTypes.NamedReference> namedRefsTable ;
+
+    // ref log head Table ??
+
+
+    //ref heads table ??
+
+
     public Stream<AdapterTypes.GlobalStateLogEntry> getGlobalStateLogTable(NonTransactionalDatabaseAdapter nonTxDbAdapter, NonTransactionalOperationContext ctx)
     {
         //globalLogFetcher is private in NonTxDatabaseAdapter
         ///** Reads from the global-state-log starting at the given global-state-log-ID. */
         // private Stream<AdapterTypes.GlobalStateLogEntry> globalLogFetcher(NonTransactionalOperationContext ctx)
+
         Stream<AdapterTypes.GlobalStateLogEntry> globalStateLogTable = nonTxDbAdapter.globalLogFetcher( ctx);
 
         return globalStateLogTable;

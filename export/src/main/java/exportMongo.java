@@ -18,7 +18,10 @@ import org.projectnessie.versioned.persist.serialize.AdapterTypes;
 import java.util.stream.Stream;
 
 public class exportMongo extends exportNonTxBackend{
+
     public void getTablesInMongoRepo(String connectionString) throws ReferenceNotFoundException {
+
+        //Initializing MongoDatabaseAdapter
 
         MongoClientConfig mongoClientConfig = ImmutableMongoClientConfig.builder()
                 .connectionString(connectionString).databaseName("nessie").build();
@@ -40,32 +43,26 @@ public class exportMongo extends exportNonTxBackend{
 
         // System.out.println("Mongo DatabaseAdapter Initialized");
 
+        Stream<ReferenceInfo<ByteString>> refs = mongoDatabaseAdapter.namedRefs(GetNamedRefsParams.DEFAULT);
+
         // Getting the Tables
 
         //Is This Right??
-        NonTransactionalOperationContext ctx = NonTransactionalOperationContext.NON_TRANSACTIONAL_OPERATION_CONTEXT;
+        ctx = NonTransactionalOperationContext.NON_TRANSACTIONAL_OPERATION_CONTEXT;
 
-        //commit log Table
-        Stream<CommitLogEntry> commitLogTable = getCommitLogTable(mongoDatabaseAdapter);
+        commitLogTable = getCommitLogTable(mongoDatabaseAdapter);
 
-        // Ref Log Table
-        Stream <RefLog> refLogTable = getRefLogTable(mongoDatabaseAdapter);
+        refLogTable = getRefLogTable(mongoDatabaseAdapter);
 
-        // Repo Desc Table
-        RepoDescription repoDescTable = getRepoDesc(mongoDatabaseAdapter);
+        repoDescTable = getRepoDesc(mongoDatabaseAdapter);
 
-        // Global State Log Table
-        Stream<AdapterTypes.GlobalStateLogEntry> globalStateLogTable = getGlobalStateLogTable(mongoDatabaseAdapter, ctx);
+        globalStateLogTable = getGlobalStateLogTable(mongoDatabaseAdapter, ctx);
 
-        // Global Pointer Table
-        AdapterTypes.GlobalStatePointer globalPointerTable = getGlobalPointerTable(mongoDatabaseAdapter, ctx);
+        globalPointerTable = getGlobalPointerTable(mongoDatabaseAdapter, ctx);
 
-        // Key Lists Table
-        //Doubtful
-        Stream<KeyListEntity> keysListsTable = getKeyListsTable(mongoDatabaseAdapter, ctx);
+        keysListsTable = getKeyListsTable(mongoDatabaseAdapter, ctx);
 
-        //Ref names Table
-        Stream<AdapterTypes.NamedReference> namedRefTable = getNamedRefsTable(mongoDatabaseAdapter, ctx);
+        namedRefsTable = getNamedRefsTable(mongoDatabaseAdapter, ctx);
 
         // ref log head Table ??
 
@@ -73,9 +70,6 @@ public class exportMongo extends exportNonTxBackend{
         //ref heads table ??
 
 
-
-
-        Stream<ReferenceInfo<ByteString>> refs = mongoDatabaseAdapter.namedRefs(GetNamedRefsParams.DEFAULT);
 
     }
 

@@ -20,13 +20,14 @@ public class exportPostgres extends exportTxBackend{
 
     public void getTablesInPostgresRepo(String url) throws Exception {
 
+        //Initializing Postgres DatabaseAdapter
         StoreWorker<Content, CommitMeta, Content.Type> storeWorker = new TableCommitMetaStoreWorker();
 
         TxDatabaseAdapterConfig dbAdapterConfig = ImmutableAdjustableTxDatabaseAdapterConfig.builder().build();
 
         TxConnectionConfig txConnectionConfig = ImmutableDefaultTxConnectionConfig.builder().build();
 
-
+        //Should initialize postgresDBAdapter properly
         PostgresDatabaseAdapter postgresDBAdapter;
         TxConnectionProvider<TxConnectionConfig> connector = new TxConnectionProvider<TxConnectionConfig>() {
             @Override
@@ -61,32 +62,23 @@ public class exportPostgres extends exportTxBackend{
 
         // System.out.println("Postgres DatabaseAdapter Initialized");
 
-        ConnectionWrapper conn = postgresDBAdapter.borrowConnection();
+        //Is this right?
+        conn = postgresDBAdapter.borrowConnection();
 
-        // Commit Log table
-        Stream<CommitLogEntry> allCommitLogEntries =  getCommitLogTable(postgresDBAdapter);
+        commitLogTable =  getCommitLogTable(postgresDBAdapter);
 
-        //Ref Log Table
-        Stream <RefLog> refLogTable = getRefLogTable(postgresDBAdapter);
+        refLogTable = getRefLogTable(postgresDBAdapter);
 
-        //Repo Desc Table
-        RepoDescription repoDescTable = getRepoDesc(postgresDBAdapter);
-
-        //Named References Table
+        repoDescTable = getRepoDesc(postgresDBAdapter);
 
         GetNamedRefsParams params = GetNamedRefsParams.DEFAULT;
-        Stream<ReferenceInfo<ByteString>> namedReferencesTable = getNamedReferencesTable(postgresDBAdapter, params);
+        namedReferencesTable = getNamedReferencesTable(postgresDBAdapter, params);
 
-        //Global State Table
-        Map<ContentId, ByteString> globalStateTable = getGlobalStateTable(postgresDBAdapter, conn);
+        globalStateTable = getGlobalStateTable(postgresDBAdapter, conn);
 
-        //Key-lists Table
-        Stream<KeyListEntity> keysListsTable = getKeyListsTable(postgresDBAdapter, conn);
+        keysListsTable = getKeyListsTable(postgresDBAdapter, conn);
 
-        //Ref Log Head table
-        //RefLogHead is private in tx package and the function to get RefLogHead is also protected function
-        RefLogHead refLogHeadTable = getRefLogHeadTable(postgresDBAdapter, conn);
-
+        refLogHeadTable = getRefLogHeadTable(postgresDBAdapter, conn);
 
 
     }

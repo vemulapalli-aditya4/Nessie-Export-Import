@@ -5,6 +5,20 @@ import java.util.stream.Stream;
 
 public class exportBackend {
 
+    //commit log Table
+    public Stream<CommitLogEntry> commitLogTable;
+
+    // Ref Log Table
+    public Stream <RefLog> refLogTable;
+
+    // Repo Desc Table
+    public RepoDescription repoDescTable ;
+
+
+    // Key Lists Table
+    //Doubtful
+    Stream<KeyListEntity> keysListsTable;
+
     public Stream<CommitLogEntry> getCommitLogTable(DatabaseAdapter dbAdapter)
     {
         Stream<CommitLogEntry> StreamOfAllCommitLogEntries = dbAdapter.scanAllCommitLogEntries();
@@ -21,7 +35,9 @@ public class exportBackend {
         //Should get the initial Hash
         Hash initialHash;
 
+
         Stream <RefLog> StreamOfAllRefLogEntries;
+
 
         StreamOfAllRefLogEntries = dbAdapter.refLog(initialHash);
 

@@ -6,6 +6,7 @@ import org.projectnessie.versioned.ReferenceNotFoundException;
 import org.projectnessie.versioned.persist.adapter.ContentId;
 import org.projectnessie.versioned.persist.adapter.KeyListEntity;
 import org.projectnessie.versioned.persist.tx.ConnectionWrapper;
+import org.projectnessie.versioned.persist.tx.RefLogHead;
 import org.projectnessie.versioned.persist.tx.TxDatabaseAdapter;
 
 import java.util.List;
@@ -14,6 +15,19 @@ import java.util.Set;
 import java.util.stream.Stream;
 
 public class exportTxBackend extends exportBackend{
+
+    ConnectionWrapper conn;
+
+    //Named References Table
+    public Stream<ReferenceInfo<ByteString>> namedReferencesTable ;
+
+    //Global State Table
+    Map<ContentId, ByteString> globalStateTable;
+
+    //Ref Log Head table
+    //RefLogHead is private in tx package and the function to get RefLogHead is also protected function
+    RefLogHead refLogHeadTable;
+
     public Stream<ReferenceInfo<ByteString>> getNamedReferencesTable(TxDatabaseAdapter txDBAdapter, GetNamedRefsParams params) throws ReferenceNotFoundException {
         Stream<ReferenceInfo<ByteString>> namedReferencesTable = txDBAdapter.namedRefs(params); ;
 
