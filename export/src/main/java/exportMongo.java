@@ -19,7 +19,7 @@ import java.util.stream.Stream;
 
 public class exportMongo extends exportNonTxBackend{
 
-    public void getTablesInMongoRepo(String connectionString) throws ReferenceNotFoundException {
+    public void getTablesInMongoRepo(String connectionString){
 
         //Initializing MongoDatabaseAdapter
 
@@ -43,7 +43,7 @@ public class exportMongo extends exportNonTxBackend{
 
         // System.out.println("Mongo DatabaseAdapter Initialized");
 
-        Stream<ReferenceInfo<ByteString>> refs = mongoDatabaseAdapter.namedRefs(GetNamedRefsParams.DEFAULT);
+        // Stream<ReferenceInfo<ByteString>> refs = mongoDatabaseAdapter.namedRefs(GetNamedRefsParams.DEFAULT);
 
         // Getting the Tables
 
@@ -70,8 +70,15 @@ public class exportMongo extends exportNonTxBackend{
         //ref heads table ??
 
 
-
     }
 
+
+    public void exportMongoRepo()
+    {
+        getTablesInMongoRepo();
+        //getTablesInDynamoRepo function must be ensured to complete before this function starts executing
+        exportIntoFiles();
+
+    }
 
 }

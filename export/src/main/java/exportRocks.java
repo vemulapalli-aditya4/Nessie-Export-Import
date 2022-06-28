@@ -24,7 +24,7 @@ public class exportRocks extends exportNonTxBackend{
 
         // System.out.println("Rocks DatabaseAdapter Initialized");
 
-        Stream<ReferenceInfo<ByteString>> refs = rocksDatabaseAdapter.namedRefs(GetNamedRefsParams.DEFAULT);
+        // Stream<ReferenceInfo<ByteString>> refs = rocksDatabaseAdapter.namedRefs(GetNamedRefsParams.DEFAULT);
 
         // Getting the Tables
 
@@ -49,6 +49,14 @@ public class exportRocks extends exportNonTxBackend{
 
 
         //ref heads table ??
+
+    }
+
+    public void exportRocksRepo()
+    {
+        getTablesInRocksRepo();
+        //getTablesInDynamoRepo function must be ensured to complete before this function starts executing
+        exportIntoFiles();
 
     }
 }

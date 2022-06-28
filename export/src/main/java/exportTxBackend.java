@@ -67,22 +67,39 @@ public class exportTxBackend extends exportBackend{
     }
 
     //Total Logic can be here
-    public void exportNamedReferencesTableIntoFile( Stream<ReferenceInfo<ByteString>> namedReferencesTable)
+    public void exportNamedReferencesTableIntoFile()
     {
 
     }
 
     //Total Logic can be here
-    public void exportGlobalStateTableIntoFile( Map<ContentId, ByteString> globalStateTable)
+    public void exportGlobalStateTableIntoFile( )
     {
 
     }
 
     //Total Logic can be here
     //RefLog is private interface
-    public void exportRefLogHeadTableIntoFile(RefLogHead refLogHeadTable)
+    public void exportRefLogHeadTableIntoFile()
     {
 
+    }
+
+    public void exportIntoFiles( )
+    {
+        exportCommitLogTableIntoFile();
+
+        exportRefLogTableIntoFile();
+
+        exportRepoDescIntoFile();
+
+        exportKeyListsTableIntoFile();
+
+        exportNamedReferencesTableIntoFile();
+
+        exportGlobalStateTableIntoFile();
+
+        exportRefLogHeadTableIntoFile();
     }
 
 }

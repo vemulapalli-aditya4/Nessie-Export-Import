@@ -33,4 +33,12 @@ public class exportH2 extends exportTxBackend{
         refLogHeadTable = getRefLogHeadTable(h2DatabaseAdapter, conn);
 
     }
+
+    public void exportH2Repo()
+    {
+        getTablesInH2Repo();
+        //getTablesInDynamoRepo function must be ensured to complete before this function starts executing
+        exportIntoFiles();
+
+    }
 }

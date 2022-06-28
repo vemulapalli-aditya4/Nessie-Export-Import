@@ -80,6 +80,13 @@ public class exportPostgres extends exportTxBackend{
 
         refLogHeadTable = getRefLogHeadTable(postgresDBAdapter, conn);
 
+    }
+
+    public void exportPostgresRepo()
+    {
+        getTablesInPostgresRepo();
+        //getTablesInDynamoRepo function must be ensured to complete before this function starts executing
+        exportIntoFiles();
 
     }
 }

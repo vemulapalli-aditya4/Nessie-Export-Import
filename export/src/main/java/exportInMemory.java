@@ -30,7 +30,7 @@ public class exportInMemory extends exportNonTxBackend{
 
         // System.out.println("Inmemory DatabaseAdapter Initialized");
 
-        Stream<ReferenceInfo<ByteString>> refs = inmemoryDatabaseAdapter.namedRefs(GetNamedRefsParams.DEFAULT);
+        // Stream<ReferenceInfo<ByteString>> refs = inmemoryDatabaseAdapter.namedRefs(GetNamedRefsParams.DEFAULT);
 
         // Getting the Tables
 
@@ -57,5 +57,12 @@ public class exportInMemory extends exportNonTxBackend{
         //ref heads table ??
     }
 
+    public void exportInMemoryRepo()
+    {
+        getTablesInInMemoryRepo();
+        //getTablesInDynamoRepo function must be ensured to complete before this function starts executing
+        exportIntoFiles();
+
+    }
 
 }

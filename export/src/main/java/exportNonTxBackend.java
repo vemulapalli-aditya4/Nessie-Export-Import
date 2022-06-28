@@ -62,4 +62,46 @@ public class exportNonTxBackend extends exportBackend {
 
         return namedRefsTable;
     }
+
+    //Total Logic can be here
+    public void  exportGlobalStateLogTableIntoFile( )
+    {
+
+    }
+
+    public void exportGlobalPointerTableIntoFile( )
+    {
+
+    }
+
+    public void exportNamedRefsTableIntoFile( )
+    {
+
+    }
+
+    //Ref Heads ??
+
+    // ref log head ??
+
+
+    public void exportIntoFiles( )
+    {
+        exportCommitLogTableIntoFile();
+
+        exportRefLogTableIntoFile();
+
+        exportRepoDescIntoFile();
+
+        exportKeyListsTableIntoFile();
+
+        exportGlobalStateLogTableIntoFile();
+
+        exportGlobalPointerTableIntoFile();
+
+        exportNamedRefsTableIntoFile();
+
+        //Ref Heads ??
+
+        //Ref Log Heads ??
+    }
 }

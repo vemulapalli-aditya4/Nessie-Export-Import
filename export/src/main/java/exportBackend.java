@@ -52,25 +52,25 @@ public class exportBackend {
     }
 
     //Total Logic can be here
-    public void exportCommitLogTableIntoFile(Stream<CommitLogEntry> commitLogTable )
+    public void exportCommitLogTableIntoFile()
     {
 
     }
 
     //Total Logic can be here
-    public void exportRefLogTableIntoFile(Stream <RefLog> refLogTable )
+    public void exportRefLogTableIntoFile()
     {
 
     }
 
     //Total Logic can be here
-    public void exportRepoDescIntoFile(RepoDescription repoDescTable)
+    public void exportRepoDescIntoFile()
     {
 
     }
 
     //Total Logic can be here
-    public void exportKeyListsTableIntoFile( Stream<KeyListEntity> keysListsTable )
+    public void exportKeyListsTableIntoFile( )
     {
 
     }
