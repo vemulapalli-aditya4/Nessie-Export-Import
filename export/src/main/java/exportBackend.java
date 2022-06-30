@@ -1,4 +1,8 @@
+import org.projectnessie.model.CommitMeta;
+import org.projectnessie.model.Content;
+import org.projectnessie.server.store.TableCommitMetaStoreWorker;
 import org.projectnessie.versioned.Hash;
+import org.projectnessie.versioned.StoreWorker;
 import org.projectnessie.versioned.persist.adapter.*;
 
 import java.util.stream.Stream;
@@ -18,6 +22,9 @@ public class exportBackend {
     // Key Lists Table
     //Doubtful
     Stream<KeyListEntity> keysListsTable;
+
+    //Initializing Postgres DatabaseAdapter
+    public StoreWorker<Content, CommitMeta, Content.Type> storeWorker = new TableCommitMetaStoreWorker();
 
     public Stream<CommitLogEntry> getCommitLogTable(DatabaseAdapter dbAdapter)
     {

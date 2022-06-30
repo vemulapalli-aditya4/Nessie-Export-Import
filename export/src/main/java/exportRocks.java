@@ -17,8 +17,6 @@ public class exportRocks extends exportNonTxBackend{
 
         //Initializing Rocks DatabaseAdapter
 
-        StoreWorker<Content, CommitMeta, Content.Type> storeWorker = new TableCommitMetaStoreWorker();
-
         //Should initialize rocksDatabaseAdapter properly
         RocksDatabaseAdapter rocksDatabaseAdapter;
 

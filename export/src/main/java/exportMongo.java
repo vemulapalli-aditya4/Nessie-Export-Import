@@ -12,6 +12,7 @@ import org.projectnessie.versioned.persist.adapter.RefLog;
 import org.projectnessie.versioned.persist.adapter.RepoDescription;
 import org.projectnessie.versioned.persist.mongodb.*;
 import org.projectnessie.versioned.persist.nontx.ImmutableAdjustableNonTransactionalDatabaseAdapterConfig;
+import org.projectnessie.versioned.persist.nontx.NonTransactionalDatabaseAdapterConfig;
 import org.projectnessie.versioned.persist.nontx.NonTransactionalOperationContext;
 import org.projectnessie.versioned.persist.serialize.AdapterTypes;
 
@@ -30,16 +31,16 @@ public class exportMongo extends exportNonTxBackend{
         mongoDBClient.configure(mongoClientConfig);
         mongoDBClient.initialize();
 
-        // System.out.println("Mongo Database Client Initialized");
+        NonTransactionalDatabaseAdapterConfig dbAdapterConfig;
+        dbAdapterConfig = ImmutableAdjustableNonTransactionalDatabaseAdapterConfig.builder().build();
 
-        StoreWorker<Content, CommitMeta, Content.Type> storeWorker = new TableCommitMetaStoreWorker();
+        // System.out.println("Mongo Database Client Initialized");
 
         MongoDatabaseAdapter mongoDatabaseAdapter = (MongoDatabaseAdapter) new MongoDatabaseAdapterFactory()
                 .newBuilder()
                 .withConnector(mongoDBClient)
-                .withConfig(ImmutableAdjustableNonTransactionalDatabaseAdapterConfig.builder().build())
+                .withConfig(dbAdapterConfig)
                 .build(storeWorker);
-
 
         // System.out.println("Mongo DatabaseAdapter Initialized");
 
@@ -73,9 +74,11 @@ public class exportMongo extends exportNonTxBackend{
     }
 
 
-    public void exportMongoRepo()
+    public void exportMongoRepo(String connectionString)
     {
-        getTablesInMongoRepo();
+        getTablesInMongoRepo(connectionString);
+
+
         //getTablesInDynamoRepo function must be ensured to complete before this function starts executing
         exportIntoFiles();
 

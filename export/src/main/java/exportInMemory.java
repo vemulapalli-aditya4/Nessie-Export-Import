@@ -5,10 +5,8 @@ import org.projectnessie.server.store.TableCommitMetaStoreWorker;
 import org.projectnessie.versioned.GetNamedRefsParams;
 import org.projectnessie.versioned.ReferenceInfo;
 import org.projectnessie.versioned.StoreWorker;
-import org.projectnessie.versioned.persist.inmem.ImmutableInmemoryConfig;
-import org.projectnessie.versioned.persist.inmem.InmemoryConfig;
-import org.projectnessie.versioned.persist.inmem.InmemoryDatabaseAdapter;
-import org.projectnessie.versioned.persist.inmem.InmemoryStore;
+import org.projectnessie.versioned.persist.inmem.*;
+import org.projectnessie.versioned.persist.nontx.NonTransactionalDatabaseAdapterConfig;
 import org.projectnessie.versioned.persist.nontx.NonTransactionalOperationContext;
 
 import java.util.stream.Stream;
@@ -21,12 +19,14 @@ public class exportInMemory extends exportNonTxBackend{
 
         InmemoryConfig inmemoryConfig = ImmutableInmemoryConfig.builder().build();
 
-        StoreWorker<Content, CommitMeta, Content.Type> storeWorker = new TableCommitMetaStoreWorker();
-
         InmemoryStore inmemoryStore ;
 
         //Should initialize inmemoryDatabaseAdapter properly
-        InmemoryDatabaseAdapter inmemoryDatabaseAdapter;
+        InmemoryDatabaseAdapter inmemoryDatabaseAdapter = new InmemoryDatabaseAdapterFactory()
+                .newBuilder()
+                .withConfig((NonTransactionalDatabaseAdapterConfig) inmemoryConfig)
+                .withConnector(inmemoryStore)
+                .build(storeWorker);
 
         // System.out.println("Inmemory DatabaseAdapter Initialized");
 

@@ -20,9 +20,6 @@ public class exportPostgres extends exportTxBackend{
 
     public void getTablesInPostgresRepo(String url) throws Exception {
 
-        //Initializing Postgres DatabaseAdapter
-        StoreWorker<Content, CommitMeta, Content.Type> storeWorker = new TableCommitMetaStoreWorker();
-
         TxDatabaseAdapterConfig dbAdapterConfig = ImmutableAdjustableTxDatabaseAdapterConfig.builder().build();
 
         TxConnectionConfig txConnectionConfig = ImmutableDefaultTxConnectionConfig.builder().build();
